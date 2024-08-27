@@ -63,6 +63,17 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+
+    phpmyadmin:
+        image: 'phpmyadmin:latest'
+        ports:
+            - 8080:80
+        networks:
+            - sail
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: ${DB_USERNAME}
+            PMA_PASSWORD: ${DB_PASSWORD}
 networks:
     sail:
         driver: bridge
