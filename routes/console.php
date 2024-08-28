@@ -10,4 +10,5 @@ Artisan::command('inspire', function () {
 
 Schedule::command('telescope:prune')->daily();
 
-Schedule::command(FetchMoviesCommand::class)->daily();
+Schedule::command(FetchMoviesCommand::class, ['day'])->daily();
+Schedule::command(FetchMoviesCommand::class, ['week'])->daily();

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->boolean('is_video');
             $table->float('vote_average');
             $table->integer('vote_count');
-            $table->json('time_windows');
+            $table->enum('time_window', ['day', 'week']);
             $table->softDeletes();
             $table->timestamps();
         });

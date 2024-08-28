@@ -27,7 +27,7 @@ class MovieFactory extends Factory
             'is_video' => $this->faker->boolean,
             'vote_average' => $this->faker->randomFloat(1, 0, 10),
             'vote_count' => $this->faker->numberBetween(0, 10000),
-            'time_windows' => [MovieTimeWindow::DAY->value],
+            'time_window' => MovieTimeWindow::DAY->value,
         ];
     }
 }

@@ -14,8 +14,8 @@ class GetTrendingMoviesStats
     public function handle(): TrendingMoviesStats
     {
         return TrendingMoviesStats::from([
-            'dailyMovieCount' => Movie::query()->whereJsonContains('time_windows', MovieTimeWindow::WEEK->value)->count(),
-            'weeklyMovieCount' => Movie::query()->whereJsonContains('time_windows', MovieTimeWindow::DAY->value)->count(),
+            'dailyMovieCount' => Movie::query()->where('time_window', MovieTimeWindow::WEEK->value)->count(),
+            'weeklyMovieCount' => Movie::query()->where('time_window', MovieTimeWindow::DAY->value)->count(),
         ]);
     }
 }
