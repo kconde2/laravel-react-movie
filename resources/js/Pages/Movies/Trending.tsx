@@ -3,19 +3,22 @@ import { Head, usePage, router } from "@inertiajs/react";
 import { PageProps, PaginatedData } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import MovieItem from "@/Components/Movie/MovieItem";
+import debounce from "lodash/debounce";
 
 interface TrendingProps extends PageProps {
     trendingMovies: PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
     timeWindow: string;
+    search: string;
 }
 
 export default function Trending({ auth }: PageProps) {
-    const { trendingMovies, timeWindow } = usePage<TrendingProps>().props;
+    const { trendingMovies, timeWindow, search } = usePage<TrendingProps>().props;
 
     const [movies, setMovies] = useState(trendingMovies.data);
     const [page, setPage] = useState(trendingMovies.current_page);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(!!trendingMovies.next_page_url);
+    const [searchTerm, setSearchTerm] = useState(search);
 
     const observerTarget = useRef(null);
 
@@ -44,11 +47,10 @@ export default function Trending({ auth }: PageProps) {
         if (loading || !trendingMovies.next_page_url) return;
 
         setLoading(true);
-        const nextPage = page + 1;
 
         router.get(
             trendingMovies.next_page_url,
-            {},
+            { search: searchTerm },
             {
                 preserveState: true,
                 preserveScroll: true,
@@ -56,7 +58,7 @@ export default function Trending({ auth }: PageProps) {
                 onSuccess: (page) => {
                     if ('trendingMovies' in page.props && typeof page.props.trendingMovies === 'object') {
                         const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
-                        setMovies(prevMovies => [...prevMovies, ...(newMovies.data || [])]);
+                        setMovies(prevMovies => [...prevMovies, ...newMovies.data]); // Ajoute les nouveaux films aux existants
                         setPage(newMovies.current_page);
                         setHasMore(!!newMovies.next_page_url);
                     }
@@ -68,6 +70,30 @@ export default function Trending({ auth }: PageProps) {
             }
         );
     };
+
+    const handleSearch = debounce((value: string) => {
+        setSearchTerm(value);
+        router.get(
+            route('movies.trending', { timeWindow }),
+            { search: value },
+            {
+                preserveState: true,
+                preserveScroll: false,
+                only: ['trendingMovies', 'search'],
+                onSuccess: (page) => {
+                    if ('trendingMovies' in page.props && typeof page.props.trendingMovies === 'object') {
+                        const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
+                        setMovies(newMovies.data);
+                        setPage(newMovies.current_page);
+                        setHasMore(!!newMovies.next_page_url);
+                    }
+                },
+                onError: (errors) => {
+                    console.error('Search error:', errors);
+                }
+            }
+        );
+    }, 300);
 
     return (
         <AuthenticatedLayout
@@ -82,14 +108,23 @@ export default function Trending({ auth }: PageProps) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div className="mb-4">
+                        <input
+                            type="text"
+                            placeholder="Search movies..."
+                            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={searchTerm}
+                            onChange={(e) => handleSearch(e.target.value)}
+                        />
+                    </div>
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-4">
                             {movies.length > 0 ? (
-                                movies.map((trendingMovie) => (
-                                    <MovieItem key={trendingMovie.id} movie={trendingMovie} />
+                                movies.map((movie) => (
+                                    <MovieItem key={movie.id} movie={movie} />
                                 ))
                             ) : (
-                                <p className="text-gray-500 dark:text-gray-400">No trending movies available.</p>
+                                <p className="text-gray-500 dark:text-gray-400">No movies found.</p>
                             )}
                             {hasMore && (
                                 <div ref={observerTarget} className="h-10 flex items-center justify-center">
