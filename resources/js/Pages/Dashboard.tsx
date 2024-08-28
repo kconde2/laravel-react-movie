@@ -5,7 +5,7 @@ import { PageProps } from "@/types";
 export default function Dashboard({
     auth,
     stats
-}: PageProps) {
+}: PageProps<{ stats: { dailyMovieCount: number, weeklyMovieCount: number } }>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
