@@ -23,7 +23,9 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie, onDelete }) => {
                 />
             </Link>
             <div className="flex-grow">
-                <h3 className="text-lg font-semibold">{movie.title}</h3>
+                <Link href={route('movies.edit', movie.id)} className="text-lg font-semibold text-blue-500 hover:text-blue-700">
+                    {movie.title}
+                </Link>
                 <p className="text-sm text-gray-600 dark:text-gray-400 overflow-hidden text-ellipsis">
                     {movie.overview}
                 </p>
