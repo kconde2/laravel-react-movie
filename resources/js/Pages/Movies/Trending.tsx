@@ -54,7 +54,6 @@ export default function Trending({ auth }: PageProps) {
                 preserveScroll: true,
                 only: ['trendingMovies'],
                 onSuccess: (page) => {
-                    // Vérification de type sûre
                     if ('trendingMovies' in page.props && typeof page.props.trendingMovies === 'object') {
                         const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
                         setMovies(prevMovies => [...prevMovies, ...(newMovies.data || [])]);
