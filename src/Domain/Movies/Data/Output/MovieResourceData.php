@@ -16,7 +16,7 @@ class MovieResourceData extends Data
         public int $tmdbId,
         public string $title,
         public string $originalTitle,
-        public string $overview,
+        public ?string $overview,
         public string $posterPath,
         public string $posterUrl,
         public string $mediaType,

@@ -44,9 +44,9 @@ export default function Show({ auth }: PageProps) {
                                     <p className="text-gray-600 mb-4">
                                         {movie.originalTitle}
                                     </p>
-                                    <p className="text-gray-800 mb-4">
+                                    {movie.overview && <p className="text-gray-800 mb-4">
                                         {movie.overview}
-                                    </p>
+                                    </p>}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <p>

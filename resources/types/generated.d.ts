@@ -10,7 +10,7 @@ id: number;
 tmdbId: number;
 title: string;
 originalTitle: string;
-overview: string;
+overview: string | null;
 posterPath: string;
 posterUrl: string;
 mediaType: string;

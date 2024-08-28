@@ -26,9 +26,9 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie, onDelete }) => {
                 <Link href={route('movies.edit', movie.id)} className="text-lg font-semibold text-blue-500 hover:text-blue-700">
                     {movie.title}
                 </Link>
-                <p className="text-sm text-gray-600 dark:text-gray-400 overflow-hidden text-ellipsis">
+                {movie.overview && <p className="text-sm text-gray-600 dark:text-gray-400 overflow-hidden text-ellipsis">
                     {movie.overview}
-                </p>
+                </p>}
                 <div className="mt-2">
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                         Release Date: {movie.releaseDate}

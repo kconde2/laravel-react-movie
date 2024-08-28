@@ -22,7 +22,6 @@ class UpdateMovieController extends Controller
             'overview' => 'nullable|string',
         ]);
 
-        // dd($movie->toArray(), $validated);
         $updateMovieAction->handle($movie, MovieData::from(
             array_merge($movie->toArray(), $validated, [
                 'adult' => $movie->is_adult,
