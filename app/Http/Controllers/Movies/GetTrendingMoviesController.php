@@ -22,8 +22,7 @@ class GetTrendingMoviesController extends Controller
     {
         $perPage = $request->input('per_page', 5);
         $timeWindow = $request->route('timeWindow');
-        $timeWindow = MovieTimeWindow::tryFrom($timeWindow);
-        abort_if(! $timeWindow, 404);
+        $timeWindow = MovieTimeWindow::from($timeWindow);
 
         $trendingMoviesQuery = $this->getTrendingMovies->handle(GetTrendingMoviesFilters::from([
             'time_window' => $timeWindow,
