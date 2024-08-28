@@ -1,14 +1,11 @@
-import React, { MutableRefObject } from "react";
+import React from "react";
 import MovieItem from "@/Components/Movie/MovieItem";
 
 interface MovieListProps {
     movies: Domain.Movies.Data.Output.MovieResourceData[];
-    hasMore: boolean;
-    loading: boolean;
-    observerTarget: MutableRefObject<HTMLDivElement | null>;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ movies, hasMore, loading, observerTarget }) => {
+const MovieList: React.FC<MovieListProps> = ({ movies }) => {
     return (
         <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-4">
@@ -18,15 +15,6 @@ const MovieList: React.FC<MovieListProps> = ({ movies, hasMore, loading, observe
                     ))
                 ) : (
                     <p className="text-gray-500 dark:text-gray-400">No movies found.</p>
-                )}
-                {hasMore && (
-                    <div ref={observerTarget} className="h-10 flex items-center justify-center">
-                        {loading ? (
-                            <p>Loading more...</p>
-                        ) : (
-                            <p>Scroll for more</p>
-                        )}
-                    </div>
                 )}
             </div>
         </div>
