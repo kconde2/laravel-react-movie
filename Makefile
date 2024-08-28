@@ -6,10 +6,12 @@ help: ## Affiche les commandes disponibles
 
 init: ## Initialise le projet (copie .env, installe les dépendances, et lance le conteneur)
 	cp -n .env.example .env || echo ".env already exists"
-	$(DOCKER_COMPOSE_SHELL) up -d
-	composer install
-	npm run build
-	vendor/bin/sail artisan migrate:fresh
+	docker run --rm --interactive --tty --volume ./:/app composer install
+	vendor/bin/sail up -d
+	vendor/bin/sail artisan key:generate
+	vendor/bin/sail npm install
+	vendor/bin/sail npm run build
+	vendor/bin/sail artisan migrate
 	vendor/bin/sail artisan ide-helper:generate
 
 idehelpers: ## Genere l'ide-helper
@@ -54,8 +56,12 @@ pint: ## Exécute la commande Pint
 test: ## Exécute les tests
 	$(DOCKER_COMPOSE_SHELL) test
 
+stop: ## Arrête les conteneurs
+	$(DOCKER_COMPOSE_SHELL) stop
+
 artisan: ## Exécute une commande artisan dans le conteneur app
 	$(DOCKER_COMPOSE_SHELL) php artisan $(filter-out $@,$(MAKECMDGOALS))
+
 
 # Pour éviter les erreurs "No rule to make target"
 %:
