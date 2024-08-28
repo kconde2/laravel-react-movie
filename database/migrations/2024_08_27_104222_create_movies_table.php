@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tmdb_id')->unique();
             $table->string('title');
             $table->string('original_title');
-            $table->text('overview');
+            $table->text('overview')->nullable();
             $table->string('poster_path');
             $table->string('media_type');
             $table->string('backdrop_path');

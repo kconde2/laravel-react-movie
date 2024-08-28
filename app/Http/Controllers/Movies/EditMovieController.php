@@ -7,7 +7,7 @@ use Domain\Movies\Actions\GetMovieDetailAction;
 use Domain\Movies\Data\Output\MovieResourceData;
 use Illuminate\Http\Request;
 
-class ShowMovieDetailController extends Controller
+class EditMovieController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -18,7 +18,7 @@ class ShowMovieDetailController extends Controller
 
         abort_if($movie === null, 404);
 
-        return inertia('Movies/ShowMovie', [
+        return inertia('Movies/EditMovie', [
             'movie' => MovieResourceData::from($movie),
         ]);
     }

@@ -1,4 +1,4 @@
-import { Head, usePage } from "@inertiajs/react";
+import { Head, usePage, Link } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
@@ -12,9 +12,17 @@ export default function Show({ auth }: PageProps) {
             <AuthenticatedLayout
                 user={auth.user}
                 header={
-                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                        Movied Detail - {movie.title}
-                    </h2>
+                    <div className="flex justify-between items-center">
+                        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                            Movie Detail - {movie.title}
+                        </h2>
+                        <Link
+                            href={route('movies.edit', movie.id)}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            Edit
+                        </Link>
+                    </div>
                 }
             >
                 <Head title={`${movie.title} - Movie Details`} />
@@ -36,9 +44,9 @@ export default function Show({ auth }: PageProps) {
                                     <p className="text-gray-600 mb-4">
                                         {movie.originalTitle}
                                     </p>
-                                    <p className="text-gray-800 mb-4">
+                                    {movie.overview && <p className="text-gray-800 mb-4">
                                         {movie.overview}
-                                    </p>
+                                    </p>}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <p>
@@ -99,6 +107,14 @@ export default function Show({ auth }: PageProps) {
                                                 movie.updatedAt
                                             ).toLocaleString()}
                                         </p>
+                                    </div>
+                                    <div className="mt-6">
+                                        <Link
+                                            href={route('movies.edit', movie.id)}
+                                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                        >
+                                            Edit Movie
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
