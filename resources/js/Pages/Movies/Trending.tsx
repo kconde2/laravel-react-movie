@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Head, usePage, router } from "@inertiajs/react";
 import { PageProps, PaginatedData } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import MovieItem from "@/Components/Movie/MovieItem";
+import MovieList from "@/Components/Movie/MovieList";
 
 interface TrendingProps extends PageProps {
     trendingMovies: PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
@@ -109,30 +109,16 @@ export default function Trending({ auth }: PageProps) {
                             type="text"
                             placeholder="Search movies..."
                             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value={searchTerm}
+                            value={searchTerm || ""}  // Remplacez `null` par une chaîne vide
                             onChange={handleSearch}
                         />
                     </div>
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-4">
-                            {movies.length > 0 ? (
-                                movies.map((movie) => (
-                                    <MovieItem key={movie.id} movie={movie} />
-                                ))
-                            ) : (
-                                <p className="text-gray-500 dark:text-gray-400">No movies found.</p>
-                            )}
-                            {hasMore && (
-                                <div ref={observerTarget} className="h-10 flex items-center justify-center">
-                                    {loading ? (
-                                        <p>Loading more...</p>
-                                    ) : (
-                                        <p>Scroll for more</p>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                    <MovieList
+                        movies={movies}
+                        hasMore={hasMore}
+                        loading={loading}
+                        observerTarget={observerTarget}
+                    />
                 </div>
             </div>
         </AuthenticatedLayout>
