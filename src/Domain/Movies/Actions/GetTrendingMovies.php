@@ -18,10 +18,10 @@ class GetTrendingMovies
 
         $query
             ->when($filters->timeWindow === MovieTimeWindow::DAY, function (Builder $query) {
-                $query->where('timeWindow', '=', MovieTimeWindow::DAY);
+                $query->where('time_window', '=', MovieTimeWindow::DAY->value);
             })
             ->when($filters->timeWindow === MovieTimeWindow::WEEK, function (Builder $query) {
-                $query->where('timeWindow', '=', MovieTimeWindow::WEEK);
+                $query->where('time_window', '=', MovieTimeWindow::WEEK->value);
             });
 
         return $query;

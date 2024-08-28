@@ -26,6 +26,17 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                     Dashboard
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink href={route('movies.trending', { timeWindow: 'day' })} active={route().current('movies.trending', { timeWindow: 'day' })}>
+                                    Trending Day Movies
+                                </NavLink>
+                            </div>
+
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink href={route('movies.trending', { timeWindow: 'week' })} active={route().current('movies.trending', { timeWindow: 'week' })}>
+                                    Trending Week Movies
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">

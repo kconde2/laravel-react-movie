@@ -2,7 +2,6 @@
 
 namespace Domain\Movies\Models;
 
-use Domain\Movies\Enums\MovieTimeWindow;
 use Domain\Shared\Models\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -35,4 +34,20 @@ class Movie extends BaseModel
         'vote_average' => 'float',
         'release_date' => 'date',
     ];
+
+    public function getPosterUrlAttribute(): string
+    {
+        $baseUrl = config('movie.tmdb.image_base_url');
+        $imageSize = config('movie.tmdb.image_size');
+
+        return "{$baseUrl}{$imageSize}{$this->poster_path}";
+    }
+
+    public function getBackdropUrlAttribute(): string
+    {
+        $baseUrl = config('movie.tmdb.image_base_url');
+        $imageSize = config('movie.tmdb.image_size');
+
+        return "{$baseUrl}{$imageSize}{$this->backdrop_path}";
+    }
 }

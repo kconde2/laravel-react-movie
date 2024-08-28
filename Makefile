@@ -51,6 +51,9 @@ typescript: ## Transforme les classes et enum en typescript
 pint: ## Exécute la commande Pint
 	$(DOCKER_COMPOSE_SHELL) bin pint
 
+test: ## Exécute les tests
+	$(DOCKER_COMPOSE_SHELL) test
+
 artisan: ## Exécute une commande artisan dans le conteneur app
 	$(DOCKER_COMPOSE_SHELL) php artisan $(filter-out $@,$(MAKECMDGOALS))
 

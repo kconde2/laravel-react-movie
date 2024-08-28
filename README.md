@@ -21,26 +21,45 @@ cd votre-projet
 make init
 ```
 
-2. Visiter l'application
+La commande doit fonctionner mais un fichier `web.sql` est disponible si la commande ne fonctionne pas.
 
-App : [http://localhost/](http://localhost/)
-Phpmyadmin : [http://localhost:8080](http://localhost:8080)
-Telescope : [http://localhost/telescope](http://localhost/telescope)
+1. Visiter l'application
+
+- App : [http://localhost/](http://localhost/)
+
+- Phpmyadmin : [http://localhost:8080](http://localhost:8080)
+
+- Telescope : [http://localhost/telescope](http://localhost/telescope)
 
 ## Commandes
 
 Pour récupérer les films de l'API
 
-- `make fetch_movies_day`
-- `make fetch_movies_week`
+```
+make fetch_movies_day
+```
+
+```
+make fetch_movies_week
+```
 
 Pour voir les informations sur la récupération quotidienne des films
 
-- `make schedule`
+```
+make schedule
+```
 
 Pour formater le code
 
-- `make pint`
+```
+make pint
+```
+
+## Tests
+
+```
+make test
+```
 
 ## Packages installés
 
@@ -51,3 +70,4 @@ Pour formater le code
 - https://laravel.com/docs/11.x/pint
 - https://spatie.be/docs/laravel-data/v4/advanced-usage/typescript
 - https://spatie.be/docs/enum/v3/introduction
+- composer require pestphp/pest-plugin-watch --dev
