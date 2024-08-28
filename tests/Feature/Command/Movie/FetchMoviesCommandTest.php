@@ -41,6 +41,7 @@ it('fetches and stores trending movies for the day time window', function (strin
         'tmdb_id' => 786892,
         'title' => 'Furiosa: A Mad Max Saga',
         'original_title' => 'Furiosa: A Mad Max Saga',
+        'time_windows' => $this->castAsJson([$timeWindow]),
     ]);
 })->with([
     'day time window' => MovieTimeWindow::DAY->value,
@@ -121,3 +122,46 @@ it('handles errors gracefully', function (string $timeWindow) {
     'day time window' => MovieTimeWindow::DAY->value,
     'week time window' => MovieTimeWindow::WEEK->value,
 ]);
+
+it('fetches and stores trending movies for both day and week time windows', function () {
+    // Arrange
+    $dayTimeWindow = 'day';
+    $weekTimeWindow = 'week';
+
+    mock(MovieApiDataProviderInterface::class)
+        ->shouldReceive('getTrendingMovies')
+        ->twice()
+        ->withArgs(function ($timeWindow) {
+            return in_array($timeWindow, ['day', 'week']);
+        })
+        ->andReturn([
+            [
+                'backdrop_path' => '/wNAhuOZ3Zf84jCIlrcI6JhgmY5q.jpg',
+                'id' => 786892,
+                'title' => 'Furiosa: A Mad Max Saga',
+                'original_title' => 'Furiosa: A Mad Max Saga',
+                'overview' => 'As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus. Sweeping through the Wasteland they come across the Citadel presided over by The Immortan Joe. While the two Tyrants war for dominance, Furiosa must survive many trials as she puts together the means to find her way home.',
+                'poster_path' => '/iADOJ8Zymht2JPMoy3R7xceZprc.jpg',
+                'media_type' => 'movie',
+                'adult' => false,
+                'original_language' => 'en',
+                'popularity' => 719.832,
+                'release_date' => '2024-05-22',
+                'video' => false,
+                'vote_average' => 7.591,
+                'vote_count' => 2843,
+            ],
+        ]);
+
+    // Act
+    Artisan::call('movies:fetch', ['timeWindow' => $dayTimeWindow]);
+    Artisan::call('movies:fetch', ['timeWindow' => $weekTimeWindow]);
+
+    // Assert
+    $this->assertDatabaseHas('movies', [
+        'tmdb_id' => 786892,
+        'title' => 'Furiosa: A Mad Max Saga',
+        'original_title' => 'Furiosa: A Mad Max Saga',
+        'time_windows' => $this->castAsJson([$dayTimeWindow, $weekTimeWindow]),
+    ]);
+});

@@ -10,6 +10,7 @@ init: ## Initialise le projet (copie .env, installe les dépendances, et lance l
 	composer install
 	npm run build
 	vendor/bin/sail artisan migrate:fresh
+	vendor/bin/sail artisan ide-helper:generate
 
 idehelpers: ## Genere l'ide-helper
 	$(DOCKER_COMPOSE_SHELL) php artisan ide-helper:generate
@@ -35,11 +36,17 @@ logs: ## Affiche les logs des conteneurs
 shell: ## Ouvre un terminal bash dans le conteneur app
 	$(DOCKER_COMPOSE_SHELL) bash
 
-fetch_movies: ## Recharge les films en base de données
-	$(DOCKER_COMPOSE_SHELL) artisan movies:fetch
+fetch_movies_day: ## Recharge les films en base de données
+	$(DOCKER_COMPOSE_SHELL) artisan movies:fetch day
+
+fetch_movies_week: ## Recharge les films en base de données
+	$(DOCKER_COMPOSE_SHELL) artisan movies:fetch week
 
 shedule_fetch_movies: ## Planifie la recuperation des films en base de données
 	$(DOCKER_COMPOSE_SHELL) artisan schedule:list
+
+typescript: ## Transforme les classes et enum en typescript
+	$(DOCKER_COMPOSE_SHELL) artisan typescript:transform
 
 pint: ## Exécute la commande Pint
 	$(DOCKER_COMPOSE_SHELL) bin pint

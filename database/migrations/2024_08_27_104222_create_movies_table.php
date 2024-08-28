@@ -20,13 +20,14 @@ return new class extends Migration
             $table->string('poster_path');
             $table->string('media_type');
             $table->string('backdrop_path');
-            $table->boolean('adult');
+            $table->boolean('is_adult');
             $table->string('original_language');
             $table->float('popularity');
             $table->date('release_date')->nullable();
-            $table->boolean('video');
+            $table->boolean('is_video');
             $table->float('vote_average');
             $table->integer('vote_count');
+            $table->json('time_windows');
             $table->softDeletes();
             $table->timestamps();
         });

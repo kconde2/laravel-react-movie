@@ -2,6 +2,7 @@
 
 namespace Domain\Movies\Database\Factories;
 
+use Domain\Movies\Enums\MovieTimeWindow;
 use Domain\Movies\Models\Movie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,13 +20,14 @@ class MovieFactory extends Factory
             'poster_path' => $this->faker->imageUrl(),
             'backdrop_path' => $this->faker->imageUrl(),
             'media_type' => 'movie',
-            'adult' => $this->faker->boolean,
+            'is_adult' => $this->faker->boolean,
             'original_language' => $this->faker->languageCode,
             'popularity' => $this->faker->randomFloat(2, 0, 100),
             'release_date' => $this->faker->date(),
-            'video' => $this->faker->boolean,
+            'is_video' => $this->faker->boolean,
             'vote_average' => $this->faker->randomFloat(1, 0, 10),
             'vote_count' => $this->faker->numberBetween(0, 10000),
+            'time_windows' => [MovieTimeWindow::DAY->value],
         ];
     }
 }

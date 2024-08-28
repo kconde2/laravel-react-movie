@@ -1,6 +1,11 @@
-## Movies
+# Movies
 
 Ce projet est une application Laravel configurée pour un environnement de développement Dockerisé. Il utilise plusieurs outils pour améliorer la productivité, notamment le support des IDE et une structure conforme au Domain-Driven Design (DDD).
+
+## Code source
+
+L'essentiel du code source se trouve dans `src/`
+
 ## Prérequis
 - Docker (docker -v)
 - Docker Compose (docker composer --version)
@@ -18,22 +23,20 @@ make init
 
 2. Visiter l'application
 
-App : `http://localhost/`
-Phpmyadmin : `http://localhost:8080`
-
+App : [http://localhost/](http://localhost/)
+Phpmyadmin : [http://localhost:8080](http://localhost:8080)
+Telescope : [http://localhost/telescope](http://localhost/telescope)
 
 ## Commandes
 
 Pour récupérer les films de l'API
 
-- `make fetch_movies`
-- `make fetch_movies timeWindow=day`
-- `make fetch_movies timeWindow=week`
+- `make fetch_movies_day`
+- `make fetch_movies_week`
 
 Pour voir les informations sur la récupération quotidienne des films
 
 - `make schedule`
-
 
 Pour formater le code
 
@@ -46,3 +49,5 @@ Pour formater le code
 - https://www.laravelactions.com/
 - https://spatie.be/docs/laravel-data/v4/introduction
 - https://laravel.com/docs/11.x/pint
+- https://spatie.be/docs/laravel-data/v4/advanced-usage/typescript
+- https://spatie.be/docs/enum/v3/introduction

@@ -2,8 +2,10 @@
 
 namespace Domain\Movies\Data;
 
+use Domain\Movies\Enums\MovieTimeWindow;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Attributes\Validation\Enum;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
@@ -34,8 +36,9 @@ class MovieData extends Data
         #[StringType]
         public string $mediaType,
 
+        #[MapInputName('adult')]
         #[BooleanType]
-        public bool $adult,
+        public bool $isAdult,
 
         #[StringType]
         public string $originalLanguage,
@@ -46,13 +49,17 @@ class MovieData extends Data
         #[Nullable, Date]
         public ?string $releaseDate,
 
+        #[MapInputName('video')]
         #[BooleanType]
-        public bool $video,
+        public bool $isVideo,
 
         #[FloatType]
         public float $voteAverage,
 
         #[IntegerType]
-        public int $voteCount
+        public int $voteCount,
+
+        #[Enum(MovieTimeWindow::class)]
+        public string $timeWindow,
     ) {}
 }

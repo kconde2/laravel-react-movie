@@ -12,6 +12,9 @@ class AddMovie
 
     public function handle(MovieData $data): Movie
     {
-        return Movie::create($data->toArray());
+        return Movie::create([
+            ...$data->toArray(),
+            'time_windows' => [$data->timeWindow],
+        ]);
     }
 }

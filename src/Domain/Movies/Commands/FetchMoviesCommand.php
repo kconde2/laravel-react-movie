@@ -58,7 +58,7 @@ class FetchMoviesCommand extends Command
 
         foreach ($trendingMovies as $trendingMovie) {
             try {
-                $movieData = MovieData::from($trendingMovie);
+                $movieData = MovieData::from([...$trendingMovie, 'timeWindow' => $timeWindow->value]);
 
                 $existingMovie = Movie::where('tmdb_id', $movieData->tmdbId)->first();
 

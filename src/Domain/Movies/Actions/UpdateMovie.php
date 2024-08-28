@@ -12,7 +12,9 @@ class UpdateMovie
 
     public function handle(Movie $movie, MovieData $data): Movie
     {
-        $movie->update($data->toArray());
+        $movie->fill($data->except('time_window')->toArray());
+        $movie->syncTimeWindows([$data->timeWindow]);
+        $movie->save();
 
         return $movie;
     }

@@ -81,6 +81,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -98,6 +101,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
@@ -170,6 +174,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -187,6 +194,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
@@ -259,6 +267,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -276,6 +287,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
@@ -348,6 +360,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -365,6 +380,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
@@ -437,6 +453,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -454,6 +473,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::get(0), map([
@@ -526,6 +546,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -543,6 +566,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::make(0), map([
@@ -615,6 +639,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -632,6 +659,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::makeWith(0), map([
@@ -704,6 +732,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -721,6 +752,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\app(0), map([
@@ -793,6 +825,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -810,6 +845,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\resolve(0), map([
@@ -882,6 +918,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -899,6 +938,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
@@ -971,6 +1011,9 @@ namespace PHPSTORM_META {
             'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Inertia\ResponseFactory' => \Inertia\ResponseFactory::class,
             'Inertia\Ssr\Gateway' => \Inertia\Ssr\HttpGateway::class,
+            'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
+            'Laravel\Telescope\Contracts\PrunableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Lorisleiva\Actions\ActionManager' => \Lorisleiva\Actions\ActionManager::class,
             'Lorisleiva\Lody\LodyManager' => \Lorisleiva\Lody\LodyManager::class,
             'Lorisleiva\Lody\Psr4Resolver' => \Lorisleiva\Lody\Psr4Resolver::class,
@@ -988,6 +1031,7 @@ namespace PHPSTORM_META {
             'mail.manager' => \Illuminate\Mail\MailManager::class,
             'memcached.connector' => \Illuminate\Cache\MemcachedConnector::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'redis' => \Illuminate\Redis\RedisManager::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Movies\GetTrendingMoviesController;
+use App\Http\Controllers\Movies\MoviesDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -14,9 +16,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', MoviesDashboardController::class)->name('dashboard');
+
+    Route::prefix('movies')->group(function () {
+        Route::get('/trending', GetTrendingMoviesController::class)->name('movies.trending');
+    });
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
