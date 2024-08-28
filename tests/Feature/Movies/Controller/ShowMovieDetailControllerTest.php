@@ -18,7 +18,7 @@ it('redirects to movie details page when clicking on a movie', function () {
 
     // Assert
     $response->assertStatus(200);
-    $response->assertInertia(fn (Assert $page) => $page->component('Movies/Show')
+    $response->assertInertia(fn (Assert $page) => $page->component('Movies/ShowMovie')
         ->has('movie', fn (Assert $movieData) => $movieData
             ->has('id')
             ->has('tmdbId')
