@@ -3,7 +3,6 @@ import { Head, usePage, router } from "@inertiajs/react";
 import { PageProps, PaginatedData } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import MovieItem from "@/Components/Movie/MovieItem";
-import debounce from "lodash/debounce";
 
 interface TrendingProps extends PageProps {
     trendingMovies: PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
@@ -19,6 +18,7 @@ export default function Trending({ auth }: PageProps) {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(!!trendingMovies.next_page_url);
     const [searchTerm, setSearchTerm] = useState(search);
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(search);
 
     const observerTarget = useRef(null);
 
@@ -43,6 +43,17 @@ export default function Trending({ auth }: PageProps) {
         };
     }, [hasMore, loading]);
 
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
+
+    useEffect(() => {
+        if (debouncedSearchTerm !== search) {
+            performSearch(debouncedSearchTerm);
+        }
+    }, [debouncedSearchTerm]);
+
     const loadMore = () => {
         if (loading || !trendingMovies.next_page_url) return;
 
@@ -58,7 +69,7 @@ export default function Trending({ auth }: PageProps) {
                 onSuccess: (page) => {
                     if ('trendingMovies' in page.props && typeof page.props.trendingMovies === 'object') {
                         const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
-                        setMovies(prevMovies => [...prevMovies, ...newMovies.data]); // Ajoute les nouveaux films aux existants
+                        setMovies(prevMovies => [...prevMovies, ...newMovies.data]);
                         setPage(newMovies.current_page);
                         setHasMore(!!newMovies.next_page_url);
                     }
@@ -71,8 +82,7 @@ export default function Trending({ auth }: PageProps) {
         );
     };
 
-    const handleSearch = debounce((value: string) => {
-        setSearchTerm(value);
+    const performSearch = (value: string) => {
         router.get(
             route('movies.trending', { timeWindow }),
             { search: value },
@@ -93,7 +103,11 @@ export default function Trending({ auth }: PageProps) {
                 }
             }
         );
-    }, 300);
+    };
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    };
 
     return (
         <AuthenticatedLayout
@@ -114,7 +128,7 @@ export default function Trending({ auth }: PageProps) {
                             placeholder="Search movies..."
                             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={searchTerm}
-                            onChange={(e) => handleSearch(e.target.value)}
+                            onChange={handleSearch}
                         />
                     </div>
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
