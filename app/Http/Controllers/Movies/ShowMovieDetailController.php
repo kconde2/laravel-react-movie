@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Movies;
 
 use App\Http\Controllers\Controller;
-use Domain\Movies\Actions\GetMovieDetail;
+use Domain\Movies\Actions\GetMovieDetailAction;
 use Domain\Movies\Data\Output\MovieResourceData;
 use Illuminate\Http\Request;
 
@@ -12,11 +12,11 @@ class ShowMovieDetailController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(GetMovieDetail $getMovieDetail, int $movieId)
+    public function __invoke(GetMovieDetailAction $getMovieDetailAction, int $movieId)
     {
-        $movie = $getMovieDetail->handle($movieId);
+        $movie = $getMovieDetailAction->handle($movieId);
 
-        abort_if(null === $movie, 404);
+        abort_if($movie === null, 404);
 
         return inertia('Movies/Show', [
             'movie' => MovieResourceData::from($movie),

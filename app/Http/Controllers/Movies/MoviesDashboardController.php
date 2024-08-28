@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Movies;
 
 use App\Http\Controllers\Controller;
-use Domain\Movies\Actions\GetTrendingMoviesStats;
+use Domain\Movies\Actions\GetTrendingMoviesStatsAction;
 use Illuminate\Http\Request;
 
 class MoviesDashboardController extends Controller
@@ -11,9 +11,9 @@ class MoviesDashboardController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(GetTrendingMoviesStats $getTrendingMoviesStats)
+    public function __invoke(GetTrendingMoviesStatsAction $getTrendingMoviesStatsAction)
     {
-        $data = $getTrendingMoviesStats->handle();
+        $data = $getTrendingMoviesStatsAction->handle();
 
         return inertia('Dashboard', ['stats' => $data]);
     }

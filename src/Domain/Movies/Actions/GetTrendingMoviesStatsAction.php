@@ -7,7 +7,7 @@ use Domain\Movies\Enums\MovieTimeWindow;
 use Domain\Movies\Models\Movie;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class GetTrendingMoviesStats
+class GetTrendingMoviesStatsAction
 {
     use AsAction;
 
