@@ -19,7 +19,7 @@ it('redirects to movie details page when clicking on a movie', function () {
     // Assert
     $response->assertStatus(200);
     $response->assertInertia(fn (Assert $page) => $page->component('Movies/Show')
-    ->has('movie', fn (Assert $movieData) => $movieData
+        ->has('movie', fn (Assert $movieData) => $movieData
             ->has('id')
             ->has('tmdbId')
             ->has('title')
@@ -59,7 +59,7 @@ it('redirects to movie details page when clicking on a movie', function () {
             ->where('timeWindow', $movie->time_window)
             ->where('createdAt', $movie->created_at->format('Y-m-d H:i:s'))
             ->where('updatedAt', $movie->updated_at->format('Y-m-d H:i:s'))
-    )
+        )
     );
 });
 

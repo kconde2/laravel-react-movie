@@ -16,7 +16,7 @@ class ShowMovieDetailController extends Controller
     {
         $movie = $getMovieDetailAction->handle($movieId);
 
-        abort_if(null === $movie, 404);
+        abort_if($movie === null, 404);
 
         return inertia('Movies/Show', [
             'movie' => MovieResourceData::from($movie),
