@@ -1,11 +1,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { PageProps as BasePageProps } from "@/types";
 
+interface DashboardProps extends BasePageProps {
+  stats: Domain.Movies.Data.TrendingMoviesStats;
+}
 export default function Dashboard({
     auth,
     stats
-}: PageProps<{ stats: { dailyMovieCount: number, weeklyMovieCount: number } }>) {
+}: DashboardProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}

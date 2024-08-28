@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Movies;
 use App\Http\Controllers\Controller;
 use Domain\Movies\Actions\GetTrendingMovies;
 use Domain\Movies\Data\GetTrendingMoviesFilters;
+use Domain\Movies\Data\Output\MovieResourceData;
+use Domain\Movies\Enums\MovieTimeWindow;
 use Illuminate\Http\Request;
 
 class GetTrendingMoviesController extends Controller
@@ -18,17 +20,20 @@ class GetTrendingMoviesController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $perPage = $request->input('per_page', 15);
-        $timeWindow = $request->input('time_window');
+        $perPage = $request->input('per_page', 5);
+        $timeWindow = $request->route('timeWindow');
+        $timeWindow = MovieTimeWindow::tryFrom($timeWindow);
+        abort_if(! $timeWindow, 404);
 
         $trendingMoviesQuery = $this->getTrendingMovies->handle(GetTrendingMoviesFilters::from([
             'time_window' => $timeWindow,
         ]));
 
-        $trendingMoviesQuery->paginate($perPage);
+        $trendingMovies = $trendingMoviesQuery->paginate($perPage);
 
         return inertia('Movies/Trending', [
-            $trendingMovies,
+            'trendingMovies' => MovieResourceData::collect($trendingMovies),
+            'timeWindow' => $timeWindow->value,
         ]);
     }
 }
