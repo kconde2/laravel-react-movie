@@ -6,7 +6,7 @@ use Domain\Movies\Data\MovieData;
 use Domain\Movies\Models\Movie;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class UpdateMovie
+class UpdateMovieAction
 {
     use AsAction;
 

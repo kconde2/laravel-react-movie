@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Movies\DeleteMovieController;
 use App\Http\Controllers\Movies\GetTrendingMoviesController;
 use App\Http\Controllers\Movies\MoviesDashboardController;
 use App\Http\Controllers\Movies\ShowMovieDetailController;
@@ -28,6 +29,9 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
         Route::get('/trending/detail/{movieId}', ShowMovieDetailController::class)
             ->where('movieId', '[0-9]+')
             ->name('movies.detail');
+        Route::delete('/trending/delete/{movieId}', DeleteMovieController::class)
+            ->where('movieId', '[0-9]+')
+            ->name('movies.delete');
     });
 });
 

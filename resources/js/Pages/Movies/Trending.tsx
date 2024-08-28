@@ -13,10 +13,10 @@ interface TrendingProps extends PageProps {
 }
 
 export default function Trending({ auth }: PageProps) {
-    const { trendingMovies, timeWindow, search } = usePage<TrendingProps>().props;
+    const { trendingMovies, timeWindow, search } =
+        usePage<TrendingProps>().props;
 
     const [searchTerm, setSearchTerm] = useState(search ?? "");
-
     const [movies, setMovies] = useState(trendingMovies.data);
     const [page, setPage] = useState(trendingMovies.current_page);
     const [loading, setLoading] = useState(false);
@@ -74,6 +74,17 @@ export default function Trending({ auth }: PageProps) {
         [timeWindow]
     );
 
+    const handleDelete = useCallback((id: number) => {
+        router.delete(route("movies.delete", id), {
+            onSuccess: () => {
+                setMovies((prevMovies) =>
+                    prevMovies.filter((movie) => movie.id !== id)
+                );
+            },
+            onError: (errors) => console.error("Delete error:", errors),
+        });
+    }, []);
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -87,8 +98,11 @@ export default function Trending({ auth }: PageProps) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <MovieSearch searchTerm={searchTerm} onSearch={performSearch} />
-                    <MovieList movies={movies} />
+                    <MovieSearch
+                        searchTerm={searchTerm}
+                        onSearch={performSearch}
+                    />
+                    <MovieList movies={movies} onDelete={handleDelete} />
                     <MovieListLoadMore
                         hasMore={hasMore}
                         loading={loading}

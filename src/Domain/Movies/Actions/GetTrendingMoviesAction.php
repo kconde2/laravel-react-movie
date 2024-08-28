@@ -8,7 +8,7 @@ use Domain\Movies\Models\Movie;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class GetTrendingMovies
+class GetTrendingMoviesAction
 {
     use AsAction;
 

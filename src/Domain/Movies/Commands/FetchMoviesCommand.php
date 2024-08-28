@@ -2,8 +2,8 @@
 
 namespace Domain\Movies\Commands;
 
-use Domain\Movies\Actions\AddMovie;
-use Domain\Movies\Actions\UpdateMovie;
+use Domain\Movies\Actions\AddMovieAction;
+use Domain\Movies\Actions\UpdateMovieAction;
 use Domain\Movies\Data\MovieData;
 use Domain\Movies\Enums\MovieTimeWindow;
 use Domain\Movies\Interfaces\MovieApiDataProviderInterface;
@@ -63,9 +63,9 @@ class FetchMoviesCommand extends Command
                 $existingMovie = Movie::where('tmdb_id', $movieData->tmdbId)->first();
 
                 if ($existingMovie) {
-                    UpdateMovie::run($existingMovie, $movieData);
+                    UpdateMovieAction::run($existingMovie, $movieData);
                 } else {
-                    AddMovie::run($movieData);
+                    AddMovieAction::run($movieData);
                 }
             } catch (\Exception $e) {
                 $this->error('Error processing movie ID: '.$e->getMessage());

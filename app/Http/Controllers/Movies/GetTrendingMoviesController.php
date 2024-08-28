@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Movies;
 
 use App\Http\Controllers\Controller;
-use Domain\Movies\Actions\GetTrendingMovies;
+use Domain\Movies\Actions\GetTrendingMoviesAction;
 use Domain\Movies\Data\GetTrendingMoviesFilters;
 use Domain\Movies\Data\Output\MovieResourceData;
 use Domain\Movies\Enums\MovieTimeWindow;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class GetTrendingMoviesController extends Controller
 {
     public function __construct(
-        private GetTrendingMovies $getTrendingMovies
+        private GetTrendingMoviesAction $getTrendingMoviesAction
     ) {}
 
     /**
@@ -25,7 +25,7 @@ class GetTrendingMoviesController extends Controller
         $timeWindow = MovieTimeWindow::from($timeWindow);
         $search = $request->input('search', '');
 
-        $trendingMoviesQuery = $this->getTrendingMovies->handle(GetTrendingMoviesFilters::from([
+        $trendingMoviesQuery = $this->getTrendingMoviesAction->handle(GetTrendingMoviesFilters::from([
             'time_window' => $timeWindow,
             'search' => $search,
         ]));
