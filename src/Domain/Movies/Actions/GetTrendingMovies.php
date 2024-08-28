@@ -17,6 +17,11 @@ class GetTrendingMovies
         $query = Movie::query();
 
         $query
+            ->when($filters->search, function (Builder $query) use ($filters) {
+                $query
+                    ->where('title', 'like', "%{$filters->search}%")
+                    ->orWhere('original_title', 'like', "%{$filters->search}%");
+            })
             ->when($filters->timeWindow === MovieTimeWindow::DAY, function (Builder $query) {
                 $query->where('time_window', '=', MovieTimeWindow::DAY->value);
             })

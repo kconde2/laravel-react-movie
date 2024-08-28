@@ -23,9 +23,11 @@ class GetTrendingMoviesController extends Controller
         $perPage = $request->input('per_page', 5);
         $timeWindow = $request->route('timeWindow');
         $timeWindow = MovieTimeWindow::from($timeWindow);
+        $search = $request->input('search', '');
 
         $trendingMoviesQuery = $this->getTrendingMovies->handle(GetTrendingMoviesFilters::from([
             'time_window' => $timeWindow,
+            'search' => $search,
         ]));
 
         $trendingMovies = $trendingMoviesQuery->paginate($perPage);
@@ -33,6 +35,7 @@ class GetTrendingMoviesController extends Controller
         return inertia('Movies/Trending', [
             'trendingMovies' => MovieResourceData::collect($trendingMovies),
             'timeWindow' => $timeWindow->value,
+            'search' => $search,
         ]);
     }
 }

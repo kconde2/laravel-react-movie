@@ -12,5 +12,6 @@ class GetTrendingMoviesFilters extends Data
 {
     public function __construct(
         public MovieTimeWindow $timeWindow,
+        public ?string $search,
     ) {}
 }
