@@ -5,7 +5,7 @@ help: ## Affiche les commandes disponibles
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 init: ## Initialise le projet (copie .env, installe les dépendances, et lance le conteneur)
-	cp -n .env.example .env || echo ".env already exists"
+	cp -f .env.example .env || echo "Failed to copy .env.example to .env"
 	docker run --rm --interactive --tty --volume ./:/app composer install
 	vendor/bin/sail up -d
 	vendor/bin/sail artisan key:generate
@@ -13,6 +13,10 @@ init: ## Initialise le projet (copie .env, installe les dépendances, et lance l
 	vendor/bin/sail npm run build
 	vendor/bin/sail artisan migrate
 	vendor/bin/sail artisan ide-helper:generate
+
+fetch_api_data: ## Recharge les données de l'API
+	vendor/bin/sail artisan movies:fetch day
+	vendor/bin/sail artisan movies:fetch week
 
 idehelpers: ## Genere l'ide-helper
 	$(DOCKER_COMPOSE_SHELL) php artisan ide-helper:generate
