@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Head, usePage, router } from "@inertiajs/react";
 import { PageProps, PaginatedData } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
@@ -18,43 +18,10 @@ export default function Trending({ auth }: PageProps) {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(!!trendingMovies.next_page_url);
     const [searchTerm, setSearchTerm] = useState(search);
-    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(search);
 
-    const observerTarget = useRef(null);
+    const observerTarget = useRef<HTMLDivElement | null>(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            entries => {
-                if (entries[0].isIntersecting && hasMore && !loading) {
-                    loadMore();
-                }
-            },
-            { threshold: 1.0 }
-        );
-
-        if (observerTarget.current) {
-            observer.observe(observerTarget.current);
-        }
-
-        return () => {
-            if (observerTarget.current) {
-                observer.unobserve(observerTarget.current);
-            }
-        };
-    }, [hasMore, loading]);
-
-    useEffect(() => {
-        const timer = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
-        return () => clearTimeout(timer);
-    }, [searchTerm]);
-
-    useEffect(() => {
-        if (debouncedSearchTerm !== search) {
-            performSearch(debouncedSearchTerm);
-        }
-    }, [debouncedSearchTerm]);
-
-    const loadMore = () => {
+    const loadMore = useCallback(() => {
         if (loading || !trendingMovies.next_page_url) return;
 
         setLoading(true);
@@ -67,22 +34,18 @@ export default function Trending({ auth }: PageProps) {
                 preserveScroll: true,
                 only: ['trendingMovies'],
                 onSuccess: (page) => {
-                    if ('trendingMovies' in page.props && typeof page.props.trendingMovies === 'object') {
-                        const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
-                        setMovies(prevMovies => [...prevMovies, ...newMovies.data]);
-                        setPage(newMovies.current_page);
-                        setHasMore(!!newMovies.next_page_url);
-                    }
+                    const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
+                    setMovies(prevMovies => [...prevMovies, ...newMovies.data]);
+                    setPage(newMovies.current_page);
+                    setHasMore(!!newMovies.next_page_url);
                     setLoading(false);
                 },
-                onError: () => {
-                    setLoading(false);
-                },
+                onError: () => setLoading(false),
             }
         );
-    };
+    }, [loading, trendingMovies.next_page_url, searchTerm]);
 
-    const performSearch = (value: string) => {
+    const performSearch = useCallback((value: string) => {
         router.get(
             route('movies.trending', { timeWindow }),
             { search: value },
@@ -91,23 +54,42 @@ export default function Trending({ auth }: PageProps) {
                 preserveScroll: false,
                 only: ['trendingMovies', 'search'],
                 onSuccess: (page) => {
-                    if ('trendingMovies' in page.props && typeof page.props.trendingMovies === 'object') {
-                        const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
-                        setMovies(newMovies.data);
-                        setPage(newMovies.current_page);
-                        setHasMore(!!newMovies.next_page_url);
-                    }
+                    const newMovies = page.props.trendingMovies as PaginatedData<Domain.Movies.Data.Output.MovieResourceData>;
+                    setMovies(newMovies.data);
+                    setPage(newMovies.current_page);
+                    setHasMore(!!newMovies.next_page_url);
                 },
-                onError: (errors) => {
-                    console.error('Search error:', errors);
-                }
+                onError: (errors) => console.error('Search error:', errors)
             }
         );
-    };
+    }, [timeWindow]);
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
-    };
+    const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+        const delayDebounceFn = setTimeout(() => {
+            performSearch(value);
+        }, 300);
+        return () => clearTimeout(delayDebounceFn);
+    }, [performSearch]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            },
+            { threshold: 1.0 }
+        );
+
+        const target = observerTarget.current;
+        if (target) observer.observe(target);
+
+        return () => {
+            if (target) observer.unobserve(target);
+        };
+    }, [loadMore]);
 
     return (
         <AuthenticatedLayout
