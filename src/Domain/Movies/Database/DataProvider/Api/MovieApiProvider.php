@@ -16,9 +16,7 @@ class MovieApiProvider implements MovieApiDataProviderInterface
         $data = Cache::remember($cacheKey, now()->addMinutes(60), function () use ($timeWindow, $language) {
             /** @var \Illuminate\Http\Client\Response $response */
             $response = Http::tmdbApi()->get("/trending/movie/{$timeWindow}", [
-                'query' => [
-                    'language' => $language,
-                ],
+                'language' => $language,
             ]);
 
             if ($response->successful()) {
@@ -39,10 +37,8 @@ class MovieApiProvider implements MovieApiDataProviderInterface
 
         $data = Cache::remember($cacheKey, now()->addMinutes(60), function () use ($movieId) {
             /** @var \Illuminate\Http\Client\Response $response */
-            $response = Http::tmdbApi()->get("/movie/{$movieId}", [
-                'query' => [
-                    'language' => 'fr-FR',
-                ],
+            $response = Http::tmdbApi()->get("/movie/$movieId", [
+                'language' => 'fr-FR',
             ]);
 
             if ($response->successful()) {
