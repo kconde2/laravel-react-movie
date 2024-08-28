@@ -20,10 +20,15 @@ git clone <url-du-depot>
 cd votre-projet
 make init
 ```
+2. Insérer les données
 
-La commande doit fonctionner mais un fichier `web.sql` est disponible si la commande ne fonctionne pas.
+```
+make fetch_api_data
+```
 
-1. Visiter l'application
+La commande doit fonctionner mais un fichier `web.sql` est disponible si la commande ne fonctionne pas. Pouvez l'importer en allant sur phpmyadmin
+
+3. Visiter l'application
 
 - App : [http://localhost/](http://localhost/)
 
