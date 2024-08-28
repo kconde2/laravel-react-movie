@@ -32,6 +32,8 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
         Route::delete('/trending/delete/{movieId}', DeleteMovieController::class)
             ->where('movieId', '[0-9]+')
             ->name('movies.delete');
+
+        // Route::put('/movies/{movie}', [UpdateMovieController::class, 'update'])->name('movies.update');
     });
 });
 
