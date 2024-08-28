@@ -26,63 +26,66 @@ export default function EditMovie({
             <Head title={`Edit ${movie.title}`} />
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <label
-                                htmlFor="title"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Title
-                            </label>
-                            <input
-                                id="title"
-                                type="text"
-                                value={data.title}
-                                onChange={(e) =>
-                                    setData("title", e.target.value)
-                                }
-                                required
-                                className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            {errors.title && (
-                                <div className="text-red-600 text-sm">
-                                    {errors.title}
-                                </div>
-                            )}
-                        </div>
+                    <div className="p-6 bg-white">
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label
+                                    htmlFor="title"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Title
+                                </label>
+                                <input
+                                    id="title"
+                                    type="text"
+                                    value={data.title}
+                                    onChange={(e) =>
+                                        setData("title", e.target.value)
+                                    }
+                                    required
+                                    className="mt-1 block w-full px-4 py-2 shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                />
+                                {errors.title && (
+                                    <div className="text-red-600 text-sm mt-2">
+                                        {errors.title}
+                                    </div>
+                                )}
+                            </div>
 
-                        <div>
-                            <label
-                                htmlFor="overview"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Overview
-                            </label>
-                            <textarea
-                                id="overview"
-                                value={data.overview}
-                                onChange={(e) =>
-                                    setData("overview", e.target.value)
-                                }
-                                className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            {errors.overview && (
-                                <div className="text-red-600 text-sm">
-                                    {errors.overview}
-                                </div>
-                            )}
-                        </div>
+                            <div>
+                                <label
+                                    htmlFor="overview"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Overview
+                                </label>
+                                <textarea
+                                    id="overview"
+                                    value={data.overview}
+                                    onChange={(e) =>
+                                        setData("overview", e.target.value)
+                                    }
+                                    className="mt-1 block w-full px-4 py-2 shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                    rows={4}
+                                />
+                                {errors.overview && (
+                                    <div className="text-red-600 text-sm mt-2">
+                                        {errors.overview}
+                                    </div>
+                                )}
+                            </div>
 
-                        <div>
-                            <button
-                                type="submit"
-                                disabled={processing}
-                                className="px-4 py-2 bg-blue-600 text-white rounded-md"
-                            >
-                                Save Changes
-                            </button>
-                        </div>
-                    </form>
+                            <div className="text-right">
+                                <button
+                                    type="submit"
+                                    disabled={processing}
+                                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                >
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>
